@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "My5hosZng7Pgzt8Ql0E3YQvdTe8wXwhfXF+mVMGwomaMn65JCnIeXnIC4edv9eW5s1IqtZc6QB1kHqJh0mSpYQ==",
+  "dgSpecHash": "CfDaguMfSFIXjbS0h3NLaPcUUffqeMdBboKuaahnM3AKxbzlbu3+TASkcWwDttQ/ly7CbxqNWZb9xogSng7zpg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Matus\\source\\repos\\UserMoneyManagement\\UserMoneyManagement\\UserMoneyManagement\\UserMoneyManagement.csproj",
+  "projectFilePath": "C:\\Users\\Matus\\source\\repos\\UserMoneyManagement\\UserMoneyManagement\\UserMoneyManagement.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Matus\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\5.0.3\\microsoft.aspnetcore.mvc.razor.extensions.5.0.3.nupkg.sha512",
     "C:\\Users\\Matus\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.runtimecompilation\\5.0.3\\microsoft.aspnetcore.mvc.razor.runtimecompilation.5.0.3.nupkg.sha512",
