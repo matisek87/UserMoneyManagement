@@ -9,8 +9,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
-using UserMoneyManagement.Interfaces;
+//using UserMoneyManagement.Interfaces;
 using UserMoneyManagement.Models;
+//using ASPNetCoreIdentity.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace UserMoneyManagement
 {
@@ -28,8 +30,10 @@ namespace UserMoneyManagement
         {
             services.AddRazorPages();
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddScoped<ICustomerRepository, SQLCustomerRepository>();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            //services.AddScoped<ICustomerRepository, SQLCustomerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +49,7 @@ namespace UserMoneyManagement
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseRouting();
 
