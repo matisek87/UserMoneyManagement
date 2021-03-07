@@ -10,8 +10,8 @@ using UserMoneyManagement.Models;
 namespace UserMoneyManagement.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210226064322_Initial")]
-    partial class Initial
+    [Migration("20210305051041_InitialMigrtation")]
+    partial class InitialMigrtation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -164,12 +164,24 @@ namespace UserMoneyManagement.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTimeOffset?>("DateOfBirth")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
