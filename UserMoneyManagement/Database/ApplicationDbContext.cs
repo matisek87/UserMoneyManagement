@@ -13,8 +13,9 @@ namespace UserMoneyManagement.Models
         {
         }
 
+       // public DbSet<ApplicationUser> Users { get; set; }
 
-            protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder builder)
             {
             base.OnModelCreating(builder);
             }

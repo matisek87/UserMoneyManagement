@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace UserMoneyManagement.Models
             this._context = context;
             this._userManager = userManager;
         }
+        [Route("create")]
         public async Task<UserResponse> CreateUser(ApplicationUser user,string password)
         {
            
@@ -33,9 +35,11 @@ namespace UserMoneyManagement.Models
 
                 if (!roleResult.Succeeded)
                 {
+                    response.Errors = response.Errors.ToList();
                     return response;
                 }
-              
+
+                response.Success = true;
                 return response;
             }
 
@@ -44,9 +48,9 @@ namespace UserMoneyManagement.Models
             return response;
         }
 
-        public Task GetUserById(string id)
+        public async Task GetUserById(string id)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Id == id);
         }
 
         public Task GetUserByName(string id)
@@ -60,11 +64,21 @@ namespace UserMoneyManagement.Models
             var foundUser = await _userManager.FindByIdAsync(user.UserId);
             if (foundUser == null)
             {
-                response.EntityNotExist = false;
+                response.EntityNotExist = true;
                 return response;
             }
 
-            response.Success = true;
+            _context.Entry(foundUser).CurrentValues.SetValues(user);
+            IdentityResult result = await _userManager.UpdateAsync(foundUser);
+            if (result.Succeeded)
+            {
+                response.Success = true;
+            }
+            else
+            {
+                response.Errors = result.Errors.ToList();
+            }
+
             return response;
         }
     }
