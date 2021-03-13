@@ -8,5 +8,6 @@ namespace UserMoneyManagement.Models
 {
     public class UserResponse : BaseResponse
     {
+
     }
 }

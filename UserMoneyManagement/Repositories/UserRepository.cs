@@ -48,14 +48,27 @@ namespace UserMoneyManagement.Models
             return response;
         }
 
-        public async Task GetUserById(string id)
+        public async Task<GetUserResponse> GetUserById(string id)
         {
+            //AsNoTracking  EF vrati data, no netrackuje zmeny, ak sa nejake vykonaju zabudne na to ... najma ak len na citanie dat
             var user = await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Id == id);
+
+            return new GetUserResponse()
+            {
+                Success = (user != null),
+                EntityNotFound = (user == null),
+                User = user
+            };
         }
 
-        public Task GetUserByName(string id)
+        public async Task<GetUserResponse> GetUserByName(string username)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByNameAsync(username);
+            return new GetUserResponse
+            {
+                Success = (user != null),
+                User = user
+            };
         }
 
         public async Task<UpdateUserResponse> UpdateUser(UpdateUserRequest user)
@@ -68,6 +81,7 @@ namespace UserMoneyManagement.Models
                 return response;
             }
 
+            //context.entry vyberie usera podla Id z DB z requestu a ulozi ho pod foundUser .currentValue vezme aktualne udaje z foundUsera a .setValues(user) do aktualnych hodnot setne hodnoty co prisli zvonku - UpdateUserRequest
             _context.Entry(foundUser).CurrentValues.SetValues(user);
             IdentityResult result = await _userManager.UpdateAsync(foundUser);
             if (result.Succeeded)

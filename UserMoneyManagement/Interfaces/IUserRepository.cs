@@ -13,8 +13,8 @@ namespace UserMoneyManagement.Interfaces
     {
         Task<UserResponse> CreateUser(ApplicationUser user, string password);
         Task<UpdateUserResponse> UpdateUser(UpdateUserRequest request);
-        Task GetUserById(string id);
-        Task GetUserByName(string id);
+        Task<GetUserResponse> GetUserById(string id);
+        Task<GetUserResponse> GetUserByName(string username);
 
     }
 }
